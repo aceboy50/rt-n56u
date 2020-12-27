@@ -120,6 +120,13 @@ ifeq ($(CONFIG_FIRMWARE_INCLUDE_LANG_CN),y)
 	sed $(DWURL_PATTERN) -i $(ROMFS_DIR)/www/CN.dict
 	sed $(DWURL_MOD_PATTERN) -i $(ROMFS_DIR)/www/CN.dict
 endif
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_LANG_VN),y)
+	echo "LANG_VN=Tiếng Việt" >> $(ROMFS_DIR)/www/EN.header
+	cp dict/VN.dict $(ROMFS_DIR)/www
+	sed $(BOARD_PATTERN) -i $(ROMFS_DIR)/www/VN.dict
+	sed $(COPYR_PATTERN) -i $(ROMFS_DIR)/www/VN.dict
+	sed $(DWURL_PATTERN) -i $(ROMFS_DIR)/www/VN.dict
+endif
 	cat $(ROMFS_DIR)/www/EN.header dict/EN.footer > $(ROMFS_DIR)/www/EN.dict
 	sed $(BOARD_PATTERN) -i $(ROMFS_DIR)/www/EN.dict
 	sed $(COPYR_PATTERN) -i $(ROMFS_DIR)/www/EN.dict
@@ -199,7 +206,6 @@ ifneq ($(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS),y)
 	rm -f $(INSTALLDIR)/www/Shadowsocks_action.asp
 	rm -f $(INSTALLDIR)/www/Shadowsocks_log.asp
 endif
-
 ifeq ($(CONFIG_FIRMWARE_WEBUI_HIDE_VPN),y)
 	rm -f $(INSTALLDIR)/www/vpn_clients.asp
 	rm -f $(INSTALLDIR)/www/vpncli.asp
